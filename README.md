@@ -1,5 +1,4 @@
-
-# Geolocation Microservice API
+# Geolocation Microservice API :earth_africa:
 
 This project is a Node.js microservice API for geolocation-based services. It allows you to store location data and query for nearby locations based on geographic coordinates.
 
@@ -59,14 +58,14 @@ docker-compose up --build
 - **Method:** `POST`
 - **Body:**
   ```json
-  {
-    "name": "Location Name",
-    "location": {
-      "type": "Point",
-      "coordinates": [longitude, latitude]
-    }
+{
+  "name": "Location Name",
+  "location": {
+    "type": "Point",
+    "coordinates": ["longitude", latitude]
   }
-  ```
+}
+```
 - **Success Response:**
     - **Code:** 201
     - **Content:** `{ "name": "Location Name", "location": { "type": "Point", "coordinates": [longitude, latitude] } }`
@@ -137,8 +136,79 @@ This documentation provides detailed information about each endpoint, including:
 
 You can also test the API directly through the Swagger UI.
 
-## Contributing
+Certainly! Here's a section you can add to your README.md file to explain how Git tagging and releases work for this project based on the workflow we've set up:
 
-Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## Versioning and Releases
+
+This project uses GitHub Actions for automated versioning, Docker image building, and release management. Here's how it works:
+
+### Automated Builds
+
+On every push to the `main` branch and for every pull request:
+
+- A Docker image is built and tagged with:
+  - The short SHA of the commit
+  - The branch name (for pushes to `main`)
+  - The PR number (for pull requests)
+- The image is pushed to GitHub Container Registry (ghcr.io)
+- No Git tag or release is created for these automated builds
+
+### Creating a Release
+
+To create a new release:
+
+1. Go to the "Actions" tab in the GitHub repository
+2. Click on the "Build, Tag, and Release" workflow
+3. Click "Run workflow"
+4. Enter the version number for the new release (e.g., 1.0.0)
+5. Click "Run workflow"
+
+This process will:
+
+1. Create a new Git tag with the specified version (e.g., v1.0.0)
+2. Build a Docker image and tag it with the specified version
+3. Push the Docker image to GitHub Container Registry
+4. Generate a changelog based on commits since the last release
+5. Create a GitHub Release with:
+   - A title including the version number
+   - The generated changelog
+   - Docker image information and pull instructions
+
+### Versioning Scheme
+
+- For manual releases, we use semantic versioning (MAJOR.MINOR.PATCH)
+- For automated builds, we use the format: YYYY.MM.DD-{short_sha}
+
+### Accessing Releases
+
+- All releases can be found in the "Releases" section of the GitHub repository
+- Docker images for all builds (including non-release builds) can be found in the project's GitHub Container Registry
+
+### Using Release Docker Images
+
+To use a specific release version of the Docker image:
+
+```bash
+docker pull ghcr.io/USERNAME/REPO_NAME:VERSION
+```
+
+Replace `USERNAME`, `REPO_NAME`, and `VERSION` with appropriate values.
+
+For the latest release:
+
+```bash
+docker pull ghcr.io/USERNAME/REPO_NAME:latest
+```
+
+Remember to update your deployment scripts or Kubernetes manifests to use these image tags when deploying new versions of the application.
+
+This section provides a comprehensive overview of how versioning and releases work in your project. It covers:
+
+1. How automated builds work for regular pushes and pull requests
+2. The step-by-step process for creating a new release
+3. What happens during the release process
+4. The versioning scheme used for both manual releases and automated builds
+5. Where to find releases and Docker images
+6. How to use the Docker images from releases
+

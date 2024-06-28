@@ -127,7 +127,7 @@ jobs:
             
             Thanks to all contributors who made this release possible!
 
-            - name: Summary
+      - name: Summary
         run: |
           echo "# 📊 Build Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY

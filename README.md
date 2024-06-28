@@ -57,7 +57,7 @@ docker-compose up --build
 - **URL:** `/api/locations`
 - **Method:** `POST`
 - **Body:**
-  ```json
+```json
 {
   "name": "Location Name",
   "location": {
@@ -83,20 +83,22 @@ docker-compose up --build
     - **Content:** Array of location objects
 
 ## Project Structure
-
-```
+```angular2html
 geolocation-microservice/
 │
-├── app.js                 # Main application file
+├── config/
+│   ├── logger.js         # Logging configuration
+│   └── swagger.js        # Swagger/OpenAPI configuration
 ├── models/
-│   └── Location.js        # MongoDB model for locations
+│   └── Location.js       # MongoDB model for locations
 ├── routes/
-│   └── locations.js       # API routes for location operations
-├── Dockerfile             # Dockerfile for containerization
-├── docker-compose.yml     # Docker Compose configuration
-├── .env                   # Environment variables (create this file)
-├── package.json           # Project dependencies and scripts
-└── README.md              # Project documentation
+│   └── locations.js      # API routes for location operations
+├── app.js                # Main application file
+├── Dockerfile            # Dockerfile for containerization
+├── docker-compose.yml    # Docker Compose configuration
+├── .env                  # Environment variables (create this file)
+├── package.json          # Project dependencies and scripts
+└── README.md             # Project documentation
 ```
 
 ## Environment Variables
@@ -200,7 +202,6 @@ For the latest release:
 ```bash
 docker pull ghcr.io/USERNAME/REPO_NAME:latest
 ```
-
 Remember to update your deployment scripts or Kubernetes manifests to use these image tags when deploying new versions of the application.
 
 This section provides a comprehensive overview of how versioning and releases work in your project. It covers:

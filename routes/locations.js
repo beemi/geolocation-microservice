@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Location = require('../models/Location');
-const logger = require('../logger');
+const logger = require('../config/logger');
 
 /**
  * @swagger

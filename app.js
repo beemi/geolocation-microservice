@@ -2,10 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpecs = require('./swagger');
+const swaggerSpecs = require('./config/swagger');
 require('dotenv').config();
 
-const logger = require('./logger');
+const logger = require('./config/logger');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/geolocation_db';
 

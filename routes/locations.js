@@ -53,15 +53,15 @@ const logger = require('../config/logger');
  *         description: Invalid input
  */
 router.post('/', async (req, res) => {
-    try {
-        const location = new Location(req.body);
-        await location.save();
-        logger.info(`New location added: ${location.name}`);
-        res.status(201).json(location);
-    } catch (error) {
-        logger.error(`Error adding location: ${error.message}`);
-        res.status(400).json({ message: error.message });
-    }
+  try {
+    const location = new Location(req.body);
+    await location.save();
+    logger.info(`New location added: ${location.name}`);
+    res.status(201).json(location);
+  } catch (error) {
+    logger.error(`Error adding location: ${error.message}`);
+    res.status(400).json({ message: error.message });
+  }
 });
 
 /**
@@ -102,26 +102,26 @@ router.post('/', async (req, res) => {
  *         description: Server error
  */
 router.get('/nearby', async (req, res) => {
-    const { longitude, latitude, maxDistance } = req.query;
+  const { longitude, latitude, maxDistance } = req.query;
 
-    try {
-        const locations = await Location.find({
-            location: {
-                $near: {
-                    $geometry: {
-                        type: 'Point',
-                        coordinates: [parseFloat(longitude), parseFloat(latitude)]
-                    },
-                    $maxDistance: parseInt(maxDistance)
-                }
-            }
-        });
-        logger.info(`Found ${locations.length} nearby locations`);
-        res.json(locations);
-    } catch (error) {
-        logger.error(`Error finding nearby locations: ${error.message}`);
-        res.status(500).json({ message: error.message });
-    }
+  try {
+    const locations = await Location.find({
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [parseFloat(longitude), parseFloat(latitude)],
+          },
+          $maxDistance: parseInt(maxDistance),
+        },
+      },
+    });
+    logger.info(`Found ${locations.length} nearby locations`);
+    res.json(locations);
+  } catch (error) {
+    logger.error(`Error finding nearby locations: ${error.message}`);
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = router;

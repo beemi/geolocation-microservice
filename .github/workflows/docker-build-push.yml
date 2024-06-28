@@ -2,9 +2,9 @@ name: Build, Tag, and Release
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
     inputs:
       version:
@@ -99,7 +99,6 @@ jobs:
           git tag -a v${{ steps.set_version.outputs.VERSION }} -m "Release ${{ steps.set_version.outputs.VERSION }}"
           git push origin v${{ steps.set_version.outputs.VERSION }}
 
-
       - name: Create Release
         if: github.event_name == 'workflow_dispatch'
         uses: actions/create-release@v1
@@ -110,21 +109,21 @@ jobs:
           release_name: 🚀 Release ${{ steps.set_version.outputs.VERSION }}
           body: |
             ## 🎉 What's New
-            
+
             ${{ steps.set_changelog.outputs.changelog }}
-            
+
             ## 🐳 Docker Image
-            
+
             Image: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.set_version.outputs.VERSION }}`
-            
+
             ## 📦 Installation
-            
+
             ```bash
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.set_version.outputs.VERSION }}
             ```
-            
+
             ## 🙏 Thank You
-            
+
             Thanks to all contributors who made this release possible!
 
       - name: Summary

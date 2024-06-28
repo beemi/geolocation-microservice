@@ -20,24 +20,28 @@ This project is a Node.js microservice API for geolocation-based services. It al
 ### Local Setup
 
 1. Clone the repository:
+
 ```
 git clone https://github.com/yourusername/geolocation-microservice.git
 cd geolocation-microservice
-   ```
+```
 
 2. Install dependencies:
+
 ```
 npm install
 ```
 
 3. Set up environment variables:
    Create a `.env` file in the root directory with the following content:
+
 ```
 MONGODB_URI=your_mongodb_connection_string
 PORT=3000
 ```
 
 4. Start the server:
+
 ```
 node app.js
 ```
@@ -47,9 +51,11 @@ node app.js
 1. Make sure Docker and Docker Compose are installed on your system.
 
 2. Build and run the containers:
+
 ```
 docker-compose up --build
 ```
+
 ## API Endpoints
 
 ### Add a New Location
@@ -57,6 +63,7 @@ docker-compose up --build
 - **URL:** `/api/locations`
 - **Method:** `POST`
 - **Body:**
+
 ```json
 {
   "name": "Location Name",
@@ -66,23 +73,25 @@ docker-compose up --build
   }
 }
 ```
+
 - **Success Response:**
-    - **Code:** 201
-    - **Content:** `{ "name": "Location Name", "location": { "type": "Point", "coordinates": [longitude, latitude] } }`
+  - **Code:** 201
+  - **Content:** `{ "name": "Location Name", "location": { "type": "Point", "coordinates": [longitude, latitude] } }`
 
 ### Find Nearby Locations
 
 - **URL:** `/api/locations/nearby`
 - **Method:** `GET`
 - **URL Params:**
-    - `longitude=[number]`
-    - `latitude=[number]`
-    - `maxDistance=[number]` (in meters)
+  - `longitude=[number]`
+  - `latitude=[number]`
+  - `maxDistance=[number]` (in meters)
 - **Success Response:**
-    - **Code:** 200
-    - **Content:** Array of location objects
+  - **Code:** 200
+  - **Content:** Array of location objects
 
 ## Project Structure
+
 ```angular2html
 geolocation-microservice/
 │
@@ -139,7 +148,6 @@ This documentation provides detailed information about each endpoint, including:
 You can also test the API directly through the Swagger UI.
 
 Certainly! Here's a section you can add to your README.md file to explain how Git tagging and releases work for this project based on the workflow we've set up:
-
 
 ## Versioning and Releases
 
@@ -202,6 +210,7 @@ For the latest release:
 ```bash
 docker pull ghcr.io/USERNAME/REPO_NAME:latest
 ```
+
 Remember to update your deployment scripts or Kubernetes manifests to use these image tags when deploying new versions of the application.
 
 This section provides a comprehensive overview of how versioning and releases work in your project. It covers:
@@ -212,4 +221,3 @@ This section provides a comprehensive overview of how versioning and releases wo
 4. The versioning scheme used for both manual releases and automated builds
 5. Where to find releases and Docker images
 6. How to use the Docker images from releases
-
